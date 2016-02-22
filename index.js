@@ -30,6 +30,25 @@ const ScrollableTabView = React.createClass({
     style: View.propTypes.style,
   },
 
+   /*
+   * Expose `ScrollView` API so this component is composable with any component that expects a `ScrollView`.
+   */
+  getScrollResponder() {
+    return this.scrollView.getScrollResponder();
+  }
+  getScrollableNode() {
+    return this.getScrollResponder().getScrollableNode();
+  }
+  getInnerViewNode() {
+    return this.getScrollResponder().getInnerViewNode();
+  }
+  scrollTo(...args) {
+    this.getScrollResponder().scrollTo(...args);
+  }
+  setNativeProps(props) {
+    this.scrollView.setNativeProps(props);
+  }
+
   getDefaultProps() {
     return {
       tabBarPosition: 'top',
